@@ -1,0 +1,14 @@
+<ng-container *ngIf="(person$ | async) as person; else loading">
+
+  
+  <li>{{ person.idNumber }}</li>
+  <ul>
+    
+    <li>{{ person.name }}</li>
+    <li>{{ person.email }}</li>
+    <li>{{ person.phone }}</li>
+    <li>{{ person.birthDate | date: "dd.MM.y" }}</li>
+  </ul>
+
+</ng-container>
+<ng-template #loading>המתן…</ng-template>

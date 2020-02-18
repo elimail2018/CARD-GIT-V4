@@ -1,0 +1,170 @@
+<div dir="rtl">
+
+
+  <div class="col-md-12 form-group row">
+
+
+    <div>
+      <mat-slide-toggle [(ngModel)]="clientValidations" (change)="onValChange($event.value)"> סוג ולידציה שגיאות   </mat-slide-toggle>
+    </div>
+
+  </div>
+  <div class="col-md-12 form-group row text-danger">{{clientValidations ? 'ולידציה פרונט' :' ולידציה שרת'}}  </div> 
+  <!--<div>
+    <mat-form-field>
+      <input matInput [(ngModel)]="modalTitle" placeholder="What's your favorite modalMessage?">
+    </mat-form-field>
+  </div>-->
+  <!--<h4 *ngIf="modalMessage">
+    You selected: <p style="font-weight: bold">{{modalMessage}}</p>
+  </h4>-->
+  <!-- Button trigger modal -->
+  <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+    הצג מידע
+  </button>-->
+  <!-- Modal -->
+
+
+  <div class="col-md-12 form-group row">
+
+    <h2>
+      מצב
+      <ng-container *ngIf="actionType ==='Edit';else adding">עריכה</ng-container>
+      <ng-template #adding>
+        הוספה
+      </ng-template>
+
+    </h2>
+  </div>
+
+
+
+
+
+  <form [formGroup]="form" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+
+    <div class="col-md-12 form-group row ">
+      <mat-form-field>
+        <mat-label>מספר זהות</mat-label>
+        <input matInput type="text" formControlName="idNumber" placeholder="000000000">
+      </mat-form-field>
+    </div>
+    <!--<div *ngIf="idNumber.errors && (idNumber.invalid || idNumber.touched)">
+      <small class="text-danger" *ngIf="idNumber.errors.required">מספר זהות חובה</small>
+      <small class="text-danger" *ngIf="idNumber.errors.minlength || idNumber.errors.pattern ">הקלד מספר בין 9 ספרות</small>
+    </div>-->
+
+
+
+
+    <div class="col-md-12 form-group row">
+
+
+      <mat-form-field>
+        <mat-label>תאריך לידה</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
+      <!--<mat-form-field>
+        <mat-label>תאריך לידה</mat-label>
+          elisha remark : patterns also can be defined in HTMl and in formsValidators
+        <input matInput class="form-control" type="text" formControlName="birthDate">
+      </mat-form-field>-->
+    </div>
+
+    <div class="col-md-12 form-group row">
+      <mat-form-field>
+        <mat-label>שם</mat-label>
+        <!--  elisha remark : patterns also can be defined in HTMl and in formsValidators-->
+        <input matInput class="form-control" type="text" formControlName="name">
+      </mat-form-field>
+    </div>
+
+
+    <div class="col-md-12 form-group row">
+      <mat-form-field>
+        <mat-label>טלפון</mat-label>
+        <!--  elisha remark : patterns also can be defined in HTMl and in formsValidators-->
+        <input matInput class="form-control" type="tel" formControlName="phone" maxlength="20">
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="col-md-12 form-group row">
+
+      <mat-form-field>
+        <mat-label>מיגדר</mat-label>
+        <mat-select [formControl]="gender" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let g of gendersList" [value]="g.val">
+            {{g.gender}}
+          </mat-option>
+        </mat-select>
+        <!--<mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>-->
+        <mat-hint>רמז</mat-hint>
+      </mat-form-field>
+
+
+
+
+    </div>
+
+    <!--<div class="form-group row">
+      <label class=" control-label col-md-12">מיגדר</label>
+      <div class="col-md-12">
+
+        <select formControlName="gender" class="form-control">
+          <option value=""></option>
+          <option value="1">זכר</option>
+          <option value="2">נקבה</option>
+          <option value="3">אחר</option>
+
+        </select>
+      </div>
+
+
+    </div>-->
+
+    <div class="col-md-12 form-group row">
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>מייל</mat-label>
+        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <!--<div class="col-md-12 form-group row">
+      <mat-form-field>
+        <mat-label>אימייל</mat-label>
+          elisha remark : patterns also can be defined in HTMl and in formsValidators
+        <input matInput class="form-control" rows="2" formControlName="email" maxlength="40" type="email">
+      </mat-form-field>
+    </div>-->
+
+
+
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-success float-right">שמור</button>
+
+      <div>
+        <!--<button mat-raised-button (click)="openDialog()">שמור</button>-->
+
+      </div>
+      <button class="btn btn-secondary float-left" (click)="cancel()">בטל</button>
+    </div>
+    <label class="text-danger"> שדות חובה (*) </label>
+
+  </form>
+
+
+</div>

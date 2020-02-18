@@ -1,0 +1,41 @@
+<div>
+  <!--<div style="float:right ;width:200px">
+
+    <img src="/assets/images/cardcom.png">
+  </div>-->
+
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,800,300' rel='stylesheet' type='text/css'>
+  <a [routerLink]="['/']" class="btn btn-info">רענן רשימה</a>
+
+  <p *ngIf="!(persons$ | async)"><em>המתן...</em></p>
+  <p>
+    <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">הוסף</a>
+  </p>
+
+  <table class="table table-sm table-hover" *ngIf="(persons$ | async)?.length>0">
+    <thead>
+      <tr>
+        <th>#זהות</th>
+        <th>שם</th>
+        <th>אימייל</th>
+        <th>תאריך לידה</th>
+        <th>טלפון</th>
+        <th>מיגדר</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of (persons$ | async)">
+        
+        <td>{{ person.idNumber }}</td>
+        <td><a [routerLink]="['/Person/', person.dbID]">{{ person.name }}</a></td>
+        <td>{{ person.email }}</td>
+        <td>{{ person.birthDate |   date :'short' }}</td>
+        <td>{{ person.phone  }}</td>
+        <td>{{ person.gender| genderTransform }}</td>  <!--to be replaced with pipe for 1זכר ,and 2נקבה and 3אחר-->
+        <td>
+          <a [routerLink]="['/Person/edit/', person.dbID]" class="btn btn-primary btn-sm float-right">ערוך</a>
+        </td>
+        <td><a [routerLink]="" (click)="delete(person.dbID)" class="btn btn-danger btn-sm float-right">מחק</a></td>
+      </tr>
+    </tbody>
+  </table>
