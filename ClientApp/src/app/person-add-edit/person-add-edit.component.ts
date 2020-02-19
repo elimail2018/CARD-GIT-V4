@@ -203,14 +203,14 @@ export class PersonAddEditComponent implements OnInit {
         email: this.form.get(this.formEmail).value,
         gender: this.form.get(this.formGender).value,    
       };
-      alert('saving');
+      //alert('saving');
       this.personService.savePerson(person)
         .subscribe((data) => {
           this.router.navigate(['/Person', data.dbID]);
         }, (server_err) => {
             
-           // alert(server_err);
-           // alert("שגיאת נתונים מהשרת - לפרטים נוספים צפה בconsole ");
+            let str = 'שגיאת נתונים ' + server_err;
+            this.openDialog('שגיאה', str);
         });
     }
 
@@ -237,8 +237,6 @@ export class PersonAddEditComponent implements OnInit {
           (server_err) =>
           {
             let str = 'שגיאת נתונים ' + server_err;
-           // alert(str);
-            
             this.openDialog('שגיאה', str);
             //console.log(server_err); alert("שגיאת נתונים מהשרת - לפרטים נוספים צפה בconsole ")
           });
