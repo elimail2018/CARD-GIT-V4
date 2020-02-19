@@ -190,8 +190,10 @@ export class PersonAddEditComponent implements OnInit {
 
   save() {
     if (!this.form.valid) {
+      this.openDialog('שגיאה', '-לא ניתן לבצע שמירה-טופס שגוי ');
       return;
     }
+   
 
     if (this.actionType === 'Add') {
       
@@ -257,3 +259,4 @@ export class PersonAddEditComponent implements OnInit {
 
   
 }
+
