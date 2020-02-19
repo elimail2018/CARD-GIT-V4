@@ -122,7 +122,8 @@ export class PersonAddEditComponent implements OnInit {
           this.form.controls[this.formEmail].setValue(data.email),
           this.form.controls[this.formPhone].setValue(data.phone),
           this.form.controls[this.formIdNumber].setValue(data.idNumber),
-          this.form.controls[this.formBirthDate].setValue(this.datePipe.transform(data.birthDate, 'yyyy-MM-dd')  )
+         // this.form.controls[this.formBirthDate].setValue(this.datePipe.transform(data.birthDate, 'yyyy-MM-dd')  )
+          this.form.controls[this.formBirthDate].setValue(data.birthDate )//fix for datepicker
          
         ));
     }
@@ -140,10 +141,11 @@ export class PersonAddEditComponent implements OnInit {
       this.form = this.formBuilder.group(
         {
           dbID: 0,
-          idNumber: ['', [Validators.required],
-                         Validators.pattern(pattern),
-                         Validators.minLength(8),
-                         Validators.maxLength(10)],
+          idNumber: ['', [Validators.required,
+            Validators.pattern(pattern),
+            Validators.minLength(8),
+            Validators.maxLength(10)]],
+                         
           name: ['', [  Validators.required,
                         Validators.minLength(2),
                         Validators.maxLength(20)

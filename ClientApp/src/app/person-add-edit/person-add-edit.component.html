@@ -46,7 +46,7 @@
     <div class="col-md-12 form-group row ">
       <mat-form-field>
         <mat-label>מספר זהות</mat-label>
-        <input matInput type="text" formControlName="idNumber" placeholder="000000000">
+        <input matInput type="text" formControlName="idNumber" placeholder="מספר בן 9 ספרות">
       </mat-form-field>
     </div>
     <!--<div *ngIf="idNumber.errors && (idNumber.invalid || idNumber.touched)">
@@ -62,7 +62,7 @@
 
       <mat-form-field>
         <mat-label>תאריך לידה</mat-label>
-        <input matInput [matDatepicker]="picker">
+        <input matInput [matDatepicker]="picker" formControlName="birthDate">
         <mat-datepicker-toggle matSuffix [for]="picker">
           <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
         </mat-datepicker-toggle>
@@ -81,7 +81,7 @@
       <mat-form-field>
         <mat-label>שם</mat-label>
         <!--  elisha remark : patterns also can be defined in HTMl and in formsValidators-->
-        <input matInput class="form-control" type="text" formControlName="name">
+        <input matInput class="form-control" type="text" formControlName="name" placeholder="2-20 תווים">
       </mat-form-field>
     </div>
 
@@ -90,7 +90,7 @@
       <mat-form-field>
         <mat-label>טלפון</mat-label>
         <!--  elisha remark : patterns also can be defined in HTMl and in formsValidators-->
-        <input matInput class="form-control" type="tel" formControlName="phone" maxlength="20">
+        <input matInput class="form-control" type="tel" formControlName="phone" maxlength="20" placeholder="8-15 תווים">
       </mat-form-field>
     </div>
 
