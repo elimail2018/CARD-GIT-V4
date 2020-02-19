@@ -64,15 +64,18 @@ export class PersonService {
 
   errorHandler(error) {
    let errorMessage = '';
-    let full_details = '';
+    let full_details = error.error;
+    let server_errors ;
     if (error.error instanceof ErrorEvent) {
       // Get client-side error
-
       errorMessage = error.error.message;
+     
     } else {
-      let server_errors = error.error.errors;
+      server_errors = error.error.errors;//server validation errors
       
+
       if (server_errors) {
+
         // Get server-side error // extract server error details
         let name_details = server_errors.Name ? server_errors.Name[0] : '';
         let id_details = server_errors.IdNumber ? server_errors.IdNumber[0] : '';
@@ -81,22 +84,26 @@ export class PersonService {
         let birthdate_details = server_errors.BirthDate ? server_errors.BirthDate[0] : '';
         /// ...
         /// ...
-        full_details = "servers attribute  validation message  : \n"
+        full_details = " שגיאת וליציה שרת : \n"
           + name_details + ",\n"
           + id_details + ",\n "
           + email_details + ",\n "
           + phone_details + ",\n"
           + birthdate_details;
 
-       
-       
-       
-      }
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message} ${full_details}\n `;
+
+
 
       }
-    //console.log(error.error);
-    
-    return throwError(full_details  || 'backend server error');
+      
+
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message} ${full_details}\n `;
+
+    }
+
+ 
+    console.log(error.error);
+    //console.log(server_errors); //a little debugging 
+    return throwError(full_details || ' שגיאת שרת');
   }
 }

@@ -72,7 +72,7 @@ namespace Card.Controllers
                 _repo.Update(person);
                 var save = await _repo.SaveAsync(person);
             }
-            catch (DbUpdateConcurrencyException ex)
+            catch (DbUpdateException ex)
             {
                 if (!PersonExists(id))
                 {
@@ -81,9 +81,18 @@ namespace Card.Controllers
                 }
                 else
                 {
-                    throw; 
+                    SqlException innerException = ex.InnerException as SqlException;
+                    if (innerException != null && (innerException.Number == 2627 || innerException.Number == 2601))
+                    {
+                        return BadRequest("לא ניתן לבצע שמירה , כפילות נתונים");
 
-                    
+                    }
+                    else
+                    {
+                        throw;
+                    }
+
+
                 }
             }
 

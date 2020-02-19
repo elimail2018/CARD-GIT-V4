@@ -136,7 +136,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>מייל</mat-label>
-        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+        <input matInput placeholder="pat@example.com" [formControl]="email" >
         <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
 
