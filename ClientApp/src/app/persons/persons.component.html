@@ -28,7 +28,7 @@
         <td>{{ person.idNumber }}</td>
         <td><a [routerLink]="['/Person/', person.dbID]">{{ person.name }}</a></td>
         <td>{{ person.email }}</td>
-        <td>{{ person.birthDate |   date :'short' }}</td>
+        <td>{{ person.birthDate |   date :'shortDate' }}</td>
         <td>{{ person.phone  }}</td>
         <td>{{ person.gender| genderTransform }}</td>  <!--to be replaced with pipe for 1זכר ,and 2נקבה and 3אחר-->
         <td>
