@@ -81,17 +81,12 @@ namespace Card.Controllers
                 }
                 else
                 {
-                    SqlException innerException = ex.InnerException as SqlException;
-                    if (innerException != null && (innerException.Number == 2627 || innerException.Number == 2601))
-                    {
-                        return BadRequest("לא ניתן לבצע שמירה , כפילות נתונים");
-
-                    }
+                    string msg;
+                    msg = duplicateExceptionHandler(ex);
+                    if (msg != "")
+                        return BadRequest(msg);
                     else
-                    {
-                        throw;
-                    }
-
+                        { throw; }
 
                 }
             }
@@ -115,18 +110,14 @@ namespace Card.Controllers
             }
             catch (DbUpdateException ex)
             {
-
+                string msg;
+                msg = duplicateExceptionHandler(ex);
+                if (msg != "")
+                    return BadRequest(msg);
+                else 
+                    { throw; }
                 //handle suplicATE ID error
-                SqlException innerException = ex.InnerException as SqlException;
-                if (innerException != null && (innerException.Number == 2627 || innerException.Number == 2601))
-                {
-                    return BadRequest("duplicate ID");
 
-                }
-                else
-                {
-                    throw;
-                }
             }
            
 
@@ -163,6 +154,21 @@ namespace Card.Controllers
         private bool PersonExists(int id)
         {
             return _context.Persons.Any(e => e.DbID == id);
+        }
+
+
+        public string duplicateExceptionHandler(Exception ex)
+        {
+            string validationMessage  ="";
+            SqlException innerException = ex.InnerException as SqlException;
+            if (innerException != null && (innerException.Number == 2627 || innerException.Number == 2601))
+            {
+                 validationMessage ="לא ניתן לבצע שמירה , כפילות נתונים";
+
+
+            }
+
+            return validationMessage;
         }
     }
 }
