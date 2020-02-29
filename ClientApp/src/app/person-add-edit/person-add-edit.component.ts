@@ -143,9 +143,9 @@ export class PersonAddEditComponent implements OnInit {
           dbID: 0,
           idNumber: ['', [Validators.required,
             Validators.pattern(pattern),
-            Validators.minLength(8),
-            Validators.maxLength(10)]],
-                         
+            Validators.minLength(9),
+            Validators.maxLength(9)]],
+                        
           name: ['', [  Validators.required,
                         Validators.minLength(2),
                         Validators.maxLength(20)
@@ -199,7 +199,7 @@ export class PersonAddEditComponent implements OnInit {
       
       let person: Person = {      
         idNumber: this.form.get(this.formIdNumber).value,
-        birthDate: new Date(),
+        birthDate: new Date(new Date(this.form.get(this.formBirthDate).value)),
         name: this.form.get(this.formName).value,
         phone: this.form.get(this.formPhone).value,
         email: this.form.get(this.formEmail).value,

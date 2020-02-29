@@ -20,7 +20,7 @@ namespace Card.Models
 
 		[Required(ErrorMessage = "תאריך שדה חובה")]
 
-		[DateOfBirth(MinAge = 0, MaxAge = 120, ErrorMessage ="נא להכניס גיל הגיוני")]
+		[DateOfBirth(MinAge = 0, MaxAge = 120, ErrorMessage ="נא להכניס תאריך לידה  תקין")]
 		public DateTime BirthDate { get; set; }
 
 		[EmailAddress (ErrorMessage ="מייל לא תקין") ]
